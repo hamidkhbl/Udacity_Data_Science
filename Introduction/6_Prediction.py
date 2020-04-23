@@ -14,14 +14,18 @@ df.hist()
 sns.heatmap(df.corr(), annot=True, fmt='.2f')
 #plt.show()
 
+df = df[['CareerSatisfaction', 'HoursPerWeek', 'JobSatisfaction', 'StackOverflowSatisfaction','Salary']]
 #remove null values
-df = df.dropna()
+df = df.dropna(subset=['Salary'], axis=0)
 
-X = df[['JobSatisfaction','CareerSatisfaction', "HoursPerWeek"]]
+# Fill the mean
+fill_mean = lambda col: col.fillna(col.mean())
+df = df.apply(fill_mean, axis=0)
+
+X = df[['CareerSatisfaction', 'HoursPerWeek', 'JobSatisfaction', 'StackOverflowSatisfaction']]
 Y = df['Salary']
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state=42)
-
 
 #instansiate
 lm = LinearRegression(normalize=True)
@@ -30,4 +34,4 @@ lm.fit(X_train, Y_train)
 #preditct
 y_test_preds = lm.predict(X_test) 
 #score
-"The r-squared score for your model was {} on {} values.".format(r2_score(Y_test, y_test_preds), len(Y_test))
+print("The r-squared score for your model was {} on {} values.".format(r2_score(Y_test, y_test_preds), len(Y_test)))
