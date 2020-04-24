@@ -12,9 +12,8 @@ study.rename(columns={'index':'method', 'CousinEducation':'count'}, inplace=True
 
 possible_values = set()
 study['method'].apply(lambda x : [possible_values.add(item) for item in x.split(';')])
-
-#print(study.head())
-#possible_values_set = set(possible_values)
 print(possible_values)
+
+
 
 
