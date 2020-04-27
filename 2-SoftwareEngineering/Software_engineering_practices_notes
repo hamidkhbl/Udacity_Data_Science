@@ -1,0 +1,6 @@
+Clean and Modular Code
+    
+unit test: use pytest
+TDD
+Logging
+Code linter: use pylint
