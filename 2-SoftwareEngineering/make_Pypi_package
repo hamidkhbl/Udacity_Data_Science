@@ -1,0 +1,101 @@
+Lest say we wanna make a package named Websites and we have two class named Medium and Linkedin 
+Flow these steps to create the package:
+1- Create a directory and name it Websites
+2- Move your class files to the folder.
+    --- Websites
+            ---Medium.py
+            ---Linkedin.py
+3- Create setup python file in the same directory as Websites
+    --- MyPackage
+        --- Websites
+                ---Medium.py
+                ---Linkedin.py
+        --- setup.py
+
+    Content of this file should be something like this:
+
+    from setuptools import setup
+    setup(name='Websites',
+            version='0.1',
+            description='Learning how to make a Pypi package',
+            packages=['Websites'],
+            zip_safe = False)
+4- Go to the Websites folder and create __init__.py file
+    --- MyPackage
+        --- Websites
+                ---Medium.py
+                ---Linkedin.py
+                ---__init__.py
+    --- setup.py
+    you can leave the init file empty. The code inside the init file gets run whenever you import 
+    a pachage inside a python program.
+
+Now the package is ready!
+5- You can go to the MyPackage directory and run pip to install the package
+    pip install .
+    this command will install the package you have just made.
+
+Now lets upload our package to pypi.org (for test test.pypi.org)
+
+6- If you don't have a pypi account register and then login
+
+7- go to Websites directory and add following files:
+    a. license.txt which include your license information(see some examples here: https://opensource.org/licenses)
+    b. README.md you need to document how your package works in this file.
+    c. setup.cfg you only need to put your readme file name here. the content will be something like this:
+    [metadata]
+    description-file = README.md
+
+    Your directory shoul look like this:
+
+        --- MyPackage
+            --- Websites
+                    ---Medium.py
+                    ---Linkedin.py
+                    ---__init__.py
+                    ---license.txt
+                    ---README.md
+                    ---setup.cfg
+        --- setup.py
+    
+8- open your terminal and cd to MyPackage directory and run this command:
+    python setup.py sdidt
+
+    running the command couple of new folders including dist will be created for you.
+    inside the dist folder there is a tar.gz file that you need to upload it to the PyPi repository.
+
+    --- MyPackage
+            --- Websites
+                    ---Medium.py
+                    ---Linkedin.py
+                    ---__init__.py
+                    ---license.txt
+                    ---README.md
+                    ---setup.cfg
+            --- dist
+                ---Websites.taz.gz
+        --- setup.py
+
+9- To upload the package we need twine package, install it using pip.
+    pip install twine
+
+10- Type the following package to upload:
+    twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+    you will be asked for your user name and password for test.pypi.org
+    Now you have your package on the test pypi
+    you can install your package using this command:
+
+    pip install --index-url https://test.pypi.org/simple/ Websites
+
+11- To upload your package to pypi used the following command:
+    twine upload dist/*
+
+    pip uninstall Websites
+    pip install Websites
+
+Congratulations you are done!
+
+
+
+
