@@ -1,1 +1,10 @@
 # ETL stands for Extract, Transform, Load
+
+Clean data:
+Delete
+impute :
+    mean
+    median
+    mod
+    forward fill
+    backward fill
