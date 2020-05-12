@@ -69,5 +69,4 @@ def main():
     # display results
     display_results(y_test, y_pred)
 
-
 main()
